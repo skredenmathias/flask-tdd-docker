@@ -1,3 +1,4 @@
+# import sys
 import os
 from flask import Flask, jsonify
 from flask_restx import Resource, Api
@@ -10,9 +11,8 @@ api = Api(app)
 
 
 # set config
-# app_settings = os.getenv('APP_SETTINGS')
-# app.config.from_object(app_settings)
-app.config.from_object('project.config.DevelopmentConfig')
+app_settings = os.getenv('APP_SETTINGS')
+app.config.from_object(app_settings)
 
 class Ping(Resource):
     def get(self):
@@ -23,3 +23,5 @@ class Ping(Resource):
     
 
 api.add_resource(Ping, '/ping')
+
+# print(app.config, file=sys.stderr)
